@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
 import dao.ProductDAO;
@@ -18,8 +19,6 @@ public class MainController implements Controller {
 			String usertype = req.getParameter("usertype");
 			String username = req.getParameter("username");
 			String password = req.getParameter("password");
-
-			System.out.println(usertype + ", " + username + ", " + password);
 
 			User user = null;
 			ArrayList<Product> products = null;
@@ -39,10 +38,9 @@ public class MainController implements Controller {
 
 				req.setAttribute("user", user);
 				req.setAttribute("products", products);
-				
-				System.out.println("##########");
-				System.out.println(user);
-				System.out.println(products);
+
+				HttpSession session = req.getSession();
+				session.setAttribute("user", user);
 
 			} catch (Exception e) {
 				e.printStackTrace();

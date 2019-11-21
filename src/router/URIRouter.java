@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.BasketController;
 import controller.Controller;
+import controller.DeleteController;
 import controller.MainController;
 import controller.ProductController;
+import controller.TakeController;
 
 public class URIRouter extends HttpServlet {
 
@@ -21,7 +24,10 @@ public class URIRouter extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		urlMap.put("/", new MainController());
+		urlMap.put("/take", new TakeController());
+		urlMap.put("/basket", new BasketController());
 		urlMap.put("/product", new ProductController());
+		urlMap.put("/delete", new DeleteController());
 	}
 
 	@Override

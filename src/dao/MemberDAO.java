@@ -52,7 +52,7 @@ public class MemberDAO {
 			e.printStackTrace();
 
 		} finally {
-			JDBCUtil.close(con);
+			JDBCUtil.close(rs);
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(con);
 		}
