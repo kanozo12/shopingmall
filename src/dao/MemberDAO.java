@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import domain.User;
 
@@ -57,6 +58,43 @@ public class MemberDAO {
 			JDBCUtil.close(con);
 		}
 		return user;
+	}
+
+	public void userCreate(String usertype, String username, String password, Date birthdate, String gender,
+			String email, String contact, String address) {
+		Connection con = JDBCUtil.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+
+		String getid_sql = "SELECT COUNT(userId) FROM shop_users";
+		String create_sql = "INSERT INTO shop_users VALUES(?,?,?,?,?,?,?,?,?)";
+
+		try {
+			stmt = con.prepareStatement(getid_sql);
+			rset = stmt.executeQuery();
+			int ID = -1;
+			rset.next();
+			ID = rset.getInt("COUNT(userId)");
+			ID++;
+			stmt = con.prepareStatement(create_sql);
+	
+			stmt.setInt(1, ID);
+			stmt.setString(2, usertype);
+			stmt.setString(3, username);
+			stmt.setString(4, password);
+			stmt.setDate(5, birthdate);
+			stmt.setString(6, gender);
+			stmt.setString(7, email);
+			stmt.setString(8, contact);
+			stmt.setString(9, address);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rset);
+			JDBCUtil.close(stmt);
+			JDBCUtil.close(con);
+		}
 	}
 
 }

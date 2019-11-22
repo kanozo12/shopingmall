@@ -13,13 +13,15 @@ public class BasketController implements Controller {
 	@Override
 	public String service(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-		HttpSession session = req.getSession();
-		int userid = Integer.parseInt(req.getParameter("userid"));
+		if (req.getMethod().equals("POST")) {
+			HttpSession session = req.getSession();
+			int userid = Integer.parseInt(req.getParameter("userid"));
 
-		ArrayList<Basket> baskets = BasketDAO.getInstance().basketRetrieve(userid);
+			ArrayList<Basket> baskets = BasketDAO.getInstance().basketRetrieve(userid);
 
-		req.setAttribute("user", session.getAttribute("user"));
-		req.setAttribute("baskets", baskets);
+			req.setAttribute("user", session.getAttribute("user1"));
+			req.setAttribute("baskets", baskets);
+		}
 
 		return "basket";
 	}

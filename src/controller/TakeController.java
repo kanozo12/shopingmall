@@ -14,35 +14,26 @@ public class TakeController implements Controller {
 	@Override
 	public String service(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		if (req.getMethod().equalsIgnoreCase("POST")) {
+			HttpSession session = req.getSession();
+
+			if (session.getAttribute("id") == null) {
+				return "login";
+			}
+
 			int userid = Integer.parseInt(req.getParameter("userid"));
 			int productid = Integer.parseInt(req.getParameter("productid"));
-			int numbers = Integer.parseInt(req.getParameter("numbers"));
-
-			if ((req.getParameter("numbers") == null)) {
-				System.out.println("No!!");
-				return "product";
-			}
-			if ((numbers == 0)) {
-				System.out.println("No --(2)");
-				return "product";
-			}
-
-			HttpSession session = req.getSession();
 
 			ArrayList<Product> products = null;
 			products = ProductDAO.getInstance().allproductRetrieve();
-			req.setAttribute("products", products);
-			req.setAttribute("user", session.getAttribute("user"));
 
+			req.setAttribute("products", products);
+			req.setAttribute("user", session.getAttribute("user1"));
 			try {
-				BasketDAO.getInstance().basketAdd(userid, productid, numbers);
-				return "product";
+				BasketDAO.getInstance().basketAdd(userid, productid, 1);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "product";
-
 			}
-
 		}
 		return "product";
 	}

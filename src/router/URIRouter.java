@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import controller.BasketController;
 import controller.Controller;
 import controller.DeleteController;
+import controller.JoinController;
+import controller.LoginController;
+import controller.LogoutController;
 import controller.MainController;
 import controller.ProductController;
 import controller.TakeController;
@@ -23,11 +26,14 @@ public class URIRouter extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		urlMap.put("/", new MainController());
+		urlMap.put("/login", new LoginController());
 		urlMap.put("/take", new TakeController());
 		urlMap.put("/basket", new BasketController());
 		urlMap.put("/product", new ProductController());
 		urlMap.put("/delete", new DeleteController());
+		urlMap.put("/join", new JoinController());
+		urlMap.put("/", new MainController());
+		urlMap.put("/logout", new LogoutController());
 	}
 
 	@Override
