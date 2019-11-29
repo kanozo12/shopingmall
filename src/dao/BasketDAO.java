@@ -19,26 +19,65 @@ public class BasketDAO {
 		return dao;
 	}
 
-	public ArrayList<Basket> basketRetrieve(int userid) throws SQLException {
-		ArrayList<Basket> baskets = new ArrayList<Basket>();
+//	public ArrayList<Basket> basketRetrieve(int userid) throws SQLException {
+//		ArrayList<Basket> baskets = new ArrayList<Basket>();
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		Connection con = JDBCUtil.getConnection();
+//
+//		String sql = "SELECT * FROM basket where userId = ? and validity = 1";
+//		try {
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, userid);
+//			rs = pstmt.executeQuery();
+//			while (rs.next()) {
+//				int BasketID = rs.getInt(1);
+//				int UserID = rs.getInt(2);
+//				int ProductID = rs.getInt(3);
+//				int Numbers = rs.getInt(4);
+//				int Validity = rs.getInt(5);
+//				baskets.add(new Basket(BasketID, UserID, ProductID, Numbers, Validity));
+//			}
+//			return baskets;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return null;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		} finally {
+//			JDBCUtil.close(rs);
+//			JDBCUtil.close(pstmt);
+//			JDBCUtil.close(con);
+//		}
+//	}
+
+	public ArrayList<Basket> basketJoin(int userid) throws SQLException {
+		ArrayList<Basket> list = new ArrayList<Basket>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection con = JDBCUtil.getConnection();
 
-		String sql = "SELECT * FROM basket where userId = ? and validity = 1";
+		String sql = "SELECT b.*, productName FROM product AS p, basket AS b WHERE userId = ? AND validity = 1 AND b.productId = p.productId";
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, userid);
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				int BasketID = rs.getInt(1);
 				int UserID = rs.getInt(2);
 				int ProductID = rs.getInt(3);
 				int Numbers = rs.getInt(4);
 				int Validity = rs.getInt(5);
-				baskets.add(new Basket(BasketID, UserID, ProductID, Numbers, Validity));
+				String productName = rs.getString(6);
+				list.add(new Basket(BasketID, UserID, ProductID, Numbers, Validity, productName));
+				System.out.println(list);
 			}
-			return baskets;
+
+			return list;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -50,6 +89,7 @@ public class BasketDAO {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(con);
 		}
+
 	}
 
 	public void basketAdd(int userid, int productid, int numbers) {
@@ -109,7 +149,7 @@ public class BasketDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, userid);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

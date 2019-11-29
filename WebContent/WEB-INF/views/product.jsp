@@ -46,9 +46,20 @@
 						<a href="logout"><i class="fas fa-sign-out-alt"></i></a>
 					</div>
 				</c:if>
+
+				<div class="icon">
+
+					<form action="/paymentlist" method="post">
+						<button type="submit">
+							<i class="fas fa-clipboard-list"></i>
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</header>
+
+
 
 	<form action="/basket" method="post">
 		<input type="hidden" name="userid" value="${user1.userId}">
@@ -82,6 +93,8 @@
 			</c:forEach>
 		</div>
 	</div>
+
+
 	<jsp:include page="layout/footer.jsp"></jsp:include>
 
 	<script src="js/script.js"></script>

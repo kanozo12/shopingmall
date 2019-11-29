@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.AddPaymentController;
 import controller.BasketController;
 import controller.Controller;
 import controller.DeleteController;
@@ -17,6 +18,8 @@ import controller.JoinController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.MainController;
+import controller.PayController;
+import controller.PaymentListController;
 import controller.ProductController;
 import controller.TakeController;
 
@@ -34,6 +37,9 @@ public class URIRouter extends HttpServlet {
 		urlMap.put("/join", new JoinController());
 		urlMap.put("/", new MainController());
 		urlMap.put("/logout", new LogoutController());
+		urlMap.put("/payment", new AddPaymentController());
+		urlMap.put("/paymentlist", new PaymentListController());
+		urlMap.put("/pay", new PayController());
 	}
 
 	@Override

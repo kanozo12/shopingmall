@@ -15,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="/assets/owlcarousel/assets/owl.carousel.min.css" />
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/basket.css">
 
 <title>Document</title>
 </head>
@@ -24,16 +24,16 @@
 	<header>
 		<div class="head-nav">
 			<div class="logo">
-				<a href="#"></a>
+				<a href="/"></a>
 			</div>
 			<div class="nav-list">
-				<li><a href="#">GOLF CLUBS</a></li>
-				<li><a href="#">ACCESSORIES</a></li>
-				<li><a href="#">WOMEN'S</a></li>
-				<li><a href="#">MEN'S</a></li>
-				<li><a href="#">OTHER BEANDS</a></li>
-				<li><a href="#">CLEARANCE</a></li>
-				<li><a href="#">TRADE-IN</a></li>
+				<li><a href="product">GOLF CLUBS</a></li>
+				<li><a href="product">ACCESSORIES</a></li>
+				<li><a href="product">WOMEN'S</a></li>
+				<li><a href="product">MEN'S</a></li>
+				<li><a href="product">OTHER BEANDS</a></li>
+				<li><a href="product">CLEARANCE</a></li>
+				<li><a href="product">TRADE-IN</a></li>
 			</div>
 			<div class="sub-icon">
 				<div class="icon">
@@ -43,11 +43,18 @@
 					<a href="#"><i class="far fa-user"></i></a>
 				</div>
 				<div class="icon">
-					<a href="#"><i class="fas fa-shopping-cart"></i></a>
+					<!-- <a href="#"><i class="fas fa-shopping-cart"></i></a> -->
+					<button type="submit" class="fas fa-shopping-cart-large"></button>
 				</div>
+				<c:if test="${not empty id}">
+					<div class="icon">
+						<a href="logout"><i class="fas fa-sign-out-alt"></i></a>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</header>
+
 	<div class="container">
 		<div class="page-header">
 			<div class="page-title">
@@ -55,106 +62,127 @@
 			</div>
 		</div>
 
+
 		<div class="basket-detail">
 			<div class="basket-list">
 				<c:if test="${empty baskets }">
 					<p class="empty">Your shopping cart is empty</p>
 				</c:if>
 
-				<c:forEach items="${baskets}" var="baskets">
-					<div class="basket-item">
-						<p>${baskets.userId }</p>
-						<p>${user.userName }</p>
-						<p>${baskets.productId }</p>
-						<p>${baskets.numbers }</p>
-					</div>
-				</c:forEach>
-			</div>
 
-			<div class="basket-order"></div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="item-boxs">
-			<div class="item-shop-title">
-				<p>RECOMMENDED FOR YOU</p>
+				<div class="basket-product">
+					<c:forEach items="${baskets}" var="baskets">
+						<div class="basket-item">
+							<div class="product-img">
+								<img src="" alt="">
+							</div>
+							<div class="product-info">
+								<a href="#">${baskets.productName }</a>
+							</div>
+							<div class="product-set">
+								<input type="text" class="quan" readonly value="${baskets.numbers }">
+								<form action="/delete" method="post">
+									<input type="hidden" name="basketid" value="${baskets.basketId }" /> 
+									<input type="hidden" name="userid" value="${baskets.userId }" /> 
+									<input type="submit" class="del-btn" value="DELETE">
+								</form>
+							</div>
+							<div class="product-price">
+								<h3></h3>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
-			<div class="owl-carousel owl-theme">
-				<div class="item">
-					<div class="item-box">
-						<img src="images/re1.png" alt="">
-						<div class="item-name">
-							<p>Rogue Fairway Woods</p>
-						</div>
-						<div class="grade">
-							<div class="star-point">
-								<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>
-							</div>
-						</div>
-						<p>From $112.99</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="item-box">
-						<img src="images/re2.png" alt="">
-						<div class="item-name">
-							<p>Big Bertha Irons</p>
-						</div>
-						<div class="grade">
-							<div class="star-point">
-								<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</div>
-						</div>
-						<p>From $727.99</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="item-box">
-						<img src="images/re3.png" alt="">
-						<div class="item-name">
-							<p>ODYSSEY EXO STROKE LAB SEVEN PUTTER</p>
-						</div>
-						<div class="grade">
-							<div class="star-point">
-								<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</div>
-						</div>
-						<p>From $296.99</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="item-box">
-						<img src="images/re4.png" alt="">
-						<div class="item-name">
-							<p>Epic Flash Drivers</p>
-						</div>
-						<div class="grade">
-							<div class="star-point">
-								<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</div>
-						</div>
-						<p>From $429.99</p>
-					</div>
-				</div>
-				<div class="item">
-					<div class="item-box">
-						<img src="images/re5.png" alt="">
-						<div class="item-name">
-							<p>APEX 19 HYBRIDS</p>
-						</div>
-						<div class="grade">
-							<div class="star-point">
-								<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</div>
-						</div>
-						<p>From $227.99</p>
-					</div>
-				</div>
-
+			<div class="basket-order">
+				<form action="/payment" method="post">
+					<input type="submit" value="Payment" class="btn"/>
+				</form>
 			</div>
 		</div>
-	</div>
 
+		<div class="container">
+			<div class="item-boxs">
+				<div class="item-shop-title">
+					<p>RECOMMENDED FOR YOU</p>
+				</div>
+				<div class="owl-carousel owl-theme">
+					<div class="item">
+						<div class="item-box">
+							<img src="images/re1.png" alt="">
+							<div class="item-name">
+								<p>Rogue Fairway Woods</p>
+							</div>
+							<div class="grade">
+								<div class="star-point">
+									<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span>
+								</div>
+							</div>
+							<p>From $112.99</p>
+						</div>
+					</div>
+					<div class="item">
+						<div class="item-box">
+							<img src="images/re2.png" alt="">
+							<div class="item-name">
+								<p>Big Bertha Irons</p>
+							</div>
+							<div class="grade">
+								<div class="star-point">
+									<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+								</div>
+							</div>
+							<p>From $727.99</p>
+						</div>
+					</div>
+					<div class="item">
+						<div class="item-box">
+							<img src="images/re3.png" alt="">
+							<div class="item-name">
+								<p>ODYSSEY EXO STROKE LAB SEVEN PUTTER</p>
+							</div>
+							<div class="grade">
+								<div class="star-point">
+									<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+								</div>
+							</div>
+							<p>From $296.99</p>
+						</div>
+					</div>
+					<div class="item">
+						<div class="item-box">
+							<img src="images/re4.png" alt="">
+							<div class="item-name">
+								<p>Epic Flash Drivers</p>
+							</div>
+							<div class="grade">
+								<div class="star-point">
+									<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+								</div>
+							</div>
+							<p>From $429.99</p>
+						</div>
+					</div>
+					<div class="item">
+						<div class="item-box">
+							<img src="images/re5.png" alt="">
+							<div class="item-name">
+								<p>APEX 19 HYBRIDS</p>
+							</div>
+							<div class="grade">
+								<div class="star-point">
+									<span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+								</div>
+							</div>
+							<p>From $227.99</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
 	<jsp:include page="layout/footer.jsp"></jsp:include>
 	<script src="js/script.js"></script>
 </body>

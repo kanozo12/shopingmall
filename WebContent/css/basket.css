@@ -1,6 +1,5 @@
 @import
-	url('https://fonts.googleapis.com/css?family=Staatliches&display=swap')
-	;
+	url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
 
 * {
 	margin: 0;
@@ -24,6 +23,10 @@ ol, ul, li {
 a {
 	text-decoration: none;
 	color: #000000;
+}
+
+input[type="submit"] {
+	font-family: FontAwesome;
 }
 
 .head-nav {
@@ -175,6 +178,7 @@ a {
 	height: 60px;
 	background-color: #fff;
 	box-shadow: 0 0 20px #ebebeb;
+
 }
 
 .basket-list .empty {
@@ -185,9 +189,69 @@ a {
 }
 
 .basket-list .basket-item {
-	height: 370px;
+	height: 190px;
 	background-color: #fff;
 	box-shadow: 0 0 20px #ebebeb;
+}
+
+.basket-product {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow:scroll;
+	overflow-x: hidden;
+	height: 500px;
+}
+
+.basket-item {
+    display: flex;
+    padding: 15px 15px 15px 15px;
+    width: 100%;
+}
+
+.product-img {
+    width: 16%;
+    height: 150px;
+}
+
+.product-info {
+    padding: 0px 15px;
+    width: 41%;
+    height: 100px;
+    text-align: left;
+}
+
+.product-info a {
+    color: #2979ff;
+    text-decoration: none;
+    outline: 0;
+    font-size: 20px;
+}
+
+.product-set {
+    width: 16%;
+    height: 150px;
+}
+
+.product-set .quan {
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.product-set .del-btn{
+    height: 50px;
+    margin: 15px 0;
+    width: 100%;
+    color: #de1818;
+}
+
+.product-price {
+    width: 27%;
+    height: 150px;
+    text-align: right;
+    color: #000000;
+    padding: 15px 25px;
 }
 
 .basket-order {

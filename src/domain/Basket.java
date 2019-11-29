@@ -6,6 +6,15 @@ public class Basket {
 	private int productId;
 	private int numbers;
 	private int validiry;
+	private String productName;
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
 	public int getBasketId() {
 		return basketId;
@@ -47,6 +56,18 @@ public class Basket {
 		this.validiry = validiry;
 	}
 
+	public Basket(int basketId, int userId, int productId, int numbers, int validiry, String productName) {
+		super();
+		this.basketId = basketId;
+		this.userId = userId;
+		this.productId = productId;
+		this.numbers = numbers;
+		this.validiry = validiry;
+		this.productName = productName;
+	}
+	
+	
+
 	public Basket(int basketId, int userId, int productId, int numbers, int validiry) {
 		super();
 		this.basketId = basketId;
@@ -63,7 +84,7 @@ public class Basket {
 	@Override
 	public String toString() {
 		return "Basket [basketId=" + basketId + ", userId=" + userId + ", productId=" + productId + ", numbers="
-				+ numbers + ", validiry=" + validiry + "]";
+				+ numbers + ", validiry=" + validiry + ", productName=" + productName + "]";
 	}
 
 }

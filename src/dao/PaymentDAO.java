@@ -19,7 +19,7 @@ public class PaymentDAO {
 		return dao;
 	}
 
-	public ArrayList<Payment> allpaymentRetrieve() throws SQLException {
+	public ArrayList<Payment> allpaymentRetrieve(int userid) throws SQLException {
 		ArrayList<Payment> payments = new ArrayList<Payment>();
 		Connection con = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
@@ -113,7 +113,7 @@ public class PaymentDAO {
 			pstmt.setString(6, contact);
 			pstmt.setString(7, creditcardnumber);
 			pstmt.setString(8, creditcardpassword);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

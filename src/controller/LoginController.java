@@ -26,15 +26,15 @@ public class LoginController implements Controller {
 			try {
 				user = MemberDAO.getInstance().userRetrieve(usertype, username, password);
 				products = ProductDAO.getInstance().allproductRetrieve();
-
-				if (user == null) {
-					System.out.println("로그인 실패");
-					return "login";
-				}
 				session.setAttribute("id", username);
 				session.setAttribute("user1", user);
 				req.setAttribute("products", products);
 				
+				if (user == null) {
+					System.out.println("로그인 실패");
+					return "login";
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "login";
